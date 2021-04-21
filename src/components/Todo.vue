@@ -9,8 +9,8 @@
     />
     <button @click="addTodo">Send</button>
     <ul>
-      <li :key="index" v-for="(todo, index) in todos">
-        {{ todo }} <span class="remove" @click="removeTodo">&times;</span>
+      <li :key="todo.id" v-for="(todo, index) in todos">
+        {{ todo }} <span class="remove" @click="removeTodo(index)">&times;</span>
       </li>
     </ul>
   </div>
@@ -22,16 +22,17 @@ export default {
   data() {
     return {
       title: "",
-      todos: ["Go to the market"],
+      todos: ["Go to the market", "gtgttkj"],
     };
   },
   methods: {
     addTodo() {
-      this.todos.push(this.title);
+      this.todos.unshift(this.title);
       this.title = "";
     },
     removeTodo(id) {
-      this.todos.splice(id, 1)
+      // this.todos.splice(id, 1)
+      this.$delete(this.todos, id)
     },
   },
 };
